@@ -27,4 +27,7 @@ public class RSA {
 	public static String longTo2Chars(long x) {
 		return "";
 	}
+
+	public static void main(String[] args) {
+	}
 }

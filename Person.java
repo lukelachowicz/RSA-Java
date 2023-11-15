@@ -10,11 +10,11 @@ public class Person {
 	}
 
 	public long getM() {
-		return 0;
+		return modulus;
 	}
 
 	public long getE() {
-		return 0;
+		return pub_exp;
 	}
 
 	public long[] encryptTo(String msg) {

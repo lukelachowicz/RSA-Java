@@ -8,10 +8,10 @@ public class Person {
 
 	public Person() {
 		rsa = new RSA();
-		long p = rsa.randPrime(1000, 5000, new Random());  // First prime number
-		long q = rsa.randPrime(1000, 5000, new Random());  // Second prime number
-		while (p == q)  // Make sure to not have p and q be the same
-			q = rsa.randPrime(100, 1000, new Random());
+		long p = rsa.randPrime(1000, 5000, new Random());  // First prime number. NOTE: Arguments need to be adjusted.
+		long q = rsa.randPrime(1000, 5000, new Random());  // Second prime number. NOTE: Arguments need to be adjusted.
+		while (p == q)  // Make sure to not have p and q be the same. NOTE: More research needed to determine whether p and q can be the same or not.
+			q = rsa.randPrime(1000, 5000, new Random());  // NOTE: Arguments need to be adjusted.
 		this.modulus = p * q;
 		long N = (p - 1) * (q - 1);
 		this.pub_exp = rsa.relPrime(N, new Random());
@@ -36,6 +36,11 @@ public class Person {
 	}
 
 	public String decrypt(long[] cipher) {
-		return "";
+		String plaintext = "";
+		for (int i = 0; i < cipher.length; i++) {
+			long cipher_char = cipher[i];
+			plaintext += rsa.modPower(cipher_char, priv_exp, modulus);
+		}
+		return plaintext;
 	}
 }

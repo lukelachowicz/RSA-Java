@@ -68,7 +68,7 @@ public class Person {
 		String plaintext = "";
 		for (int i = 0; i < cipher.length; i++) {  // Iterate over each long in the array (which is ciphertext representing a character) and decrypt using the RSA decryption formula. The result will be stored in a string.
 			long cipher_char = cipher[i];
-			plaintext += rsa.modPower(cipher_char, priv_exp, modulus);  // The RSA decryption formula with the result casted as a char and appended to the string.
+			plaintext += ((char) rsa.modPower(cipher_char, priv_exp, modulus));  // The RSA decryption formula with the result casted as a char and appended to the string.
 		}
 		return plaintext;
 	}

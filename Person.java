@@ -26,8 +26,13 @@ public class Person {
 		return pub_exp;
 	}
 
-	public long[] encryptTo(String msg) {
-		return new long[8];
+	public long[] encryptTo(String msg, Person recipient) {
+		long[] ciphertext = new long[msg.length()];
+		for (int i = 0; i < msg.length(); i++) {
+			long num_char = (long) msg.charAt(i);
+			ciphertext[i] = rsa.modPower(num_char, recipient.getE(), recipient.getM());
+		}
+		return ciphertext;
 	}
 
 	public String decrypt(long[] cipher) {

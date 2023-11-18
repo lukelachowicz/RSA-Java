@@ -1,12 +1,21 @@
+import java.util.Random;
+
 public class Person {
 	private long modulus;  // The public modulus 'm'
 	private long pub_exp;  // The public exponent 'e'
 	private long priv_exp;  // The private exponent 'd' aka the key
+	private RSA rsa;
 
-	public Person(long modulus, long pub_exp, long priv_exp) {
-		this.modulus = modulus;
-		this.pub_exp = pub_exp;
-		this.priv_exp = priv_exp;
+	public Person() {
+		rsa = new RSA();
+		long p = rsa.randPrime(1000, 5000, new Random());  // First prime number
+		long q = rsa.randPrime(1000, 5000, new Random());  // Second prime number
+		while (p == q)  // Make sure to not have p and q be the same
+			q = rsa.randPrime(100, 1000, new Random());
+		this.modulus = p * q;
+		long N = (p - 1) * (q - 1);
+		this.pub_exp = rsa.relPrime(N, new Random());
+		this.priv_exp = rsa.inverse(pub_exp, N);
 	}
 
 	public long getM() {

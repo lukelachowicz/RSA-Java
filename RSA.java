@@ -8,8 +8,14 @@ public class RSA {
 	public void show(long[] cipher) {
 	}
 
-	public long modPower(long b, long p, long m) {
-		return 0;
+	public static long modPower(long b, long p, long m) {
+		if (p == 0) {
+			return 1;
+		}
+		if (p == 1) {
+			return b;
+		}
+		return modPower(b, p/2, m) * modPower(b, p/2, m) * modPower(b, p%2, m) % m;
 	}
 
 	public long randPrime(int m, int n, Random rand) {
@@ -26,5 +32,10 @@ public class RSA {
 
 	public String longTo2Chars(long x) {
 		return "";
+	}
+
+	public static void main(String[] args) {
+		long result = modPower(7, 2, 47);
+		System.out.println(result);
 	}
 }
